@@ -12,7 +12,7 @@ const penguins = [{
 }];
 
 // imperative approach
-const avgAgeOfMales = (penguins) => {
+const impAvgAgeOfMales = (penguins) => {
 
 	let total = 0;
 	let num = 0;
@@ -30,4 +30,21 @@ const avgAgeOfMales = (penguins) => {
 
 };
 
-console.log("Imperative approach avgAgeOfMales returns ", avgAgeOfMales(penguins));
+console.log("Imperative approach avgAgeOfMales returns ", impAvgAgeOfMales(penguins));
+
+// functional approach
+const fnAvgAgeOfMales = (penguins) => {
+
+	// filter
+	const males = penguins.filter((penguin) => penguin.male);
+
+	// sum
+	const sumAge = males.reduce((memo, penguin) => {
+		return memo + penguin.age;
+	}, 0);
+
+	return sumAge / males.length;
+
+};
+
+console.log("Functional approach avgAgeOfMales returns ", fnAvgAgeOfMales(penguins));

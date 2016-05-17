@@ -12,7 +12,7 @@ var penguins = [{
 }];
 
 // imperative approach
-var avgAgeOfMales = function avgAgeOfMales(penguins) {
+var impAvgAgeOfMales = function impAvgAgeOfMales(penguins) {
 
 	var total = 0;
 	var num = 0;
@@ -49,4 +49,22 @@ var avgAgeOfMales = function avgAgeOfMales(penguins) {
 	return total / num;
 };
 
-console.log("Imperative approach avgAgeOfMales returns ", avgAgeOfMales(penguins));
+console.log("Imperative approach avgAgeOfMales returns ", impAvgAgeOfMales(penguins));
+
+// functional approach
+var fnAvgAgeOfMales = function fnAvgAgeOfMales(penguins) {
+
+	// filter
+	var males = penguins.filter(function (penguin) {
+		return penguin.male;
+	});
+
+	// sum
+	var sumAge = males.reduce(function (memo, penguin) {
+		return memo + penguin.age;
+	}, 0);
+
+	return sumAge / males.length;
+};
+
+console.log("Functional approach avgAgeOfMales returns ", fnAvgAgeOfMales(penguins));
