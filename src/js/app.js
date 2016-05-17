@@ -48,3 +48,31 @@ const fnAvgAgeOfMales = (penguins) => {
 };
 
 console.log("Functional approach avgAgeOfMales returns ", fnAvgAgeOfMales(penguins));
+
+// imperative approach for grouping all the male penguins
+var impGrouped = {};
+for (let penguin of penguins) {
+	if (penguin.male) {
+		let age = penguin.age;
+		if (!impGrouped[age]) {
+			impGrouped[age] = [];
+		}
+		impGrouped[age].push(penguin.name);
+	}
+}
+
+console.log('imperative approach for grouping male penguins result: ', impGrouped);
+
+// functional approach for grouping all the male penguins
+const fnGrouped = penguins
+				.filter((penguin) => penguin.male)
+				.reduce((memo, penguin) => {
+
+					const current = memo[penguin.age] || [];
+					const group = {[penguin.age]: [...current, penguin.name]};
+
+					return Object.assign({}, memo, group);
+
+				}, {});
+
+console.log('functional approach for grouping male penguins result: ', fnGrouped);
